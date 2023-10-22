@@ -15,14 +15,12 @@ public class EmailSenderServiceImpl implements EmailSenderService {
     }
 
     @Override
-    public void sendEmail(String to, String subject, String message) {
-
+    public void sendEmail(String to, String message) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom("vlad-13@list.ru");
         simpleMailMessage.setTo(to);
-        simpleMailMessage.setSubject(subject);
+        simpleMailMessage.setSubject("notification");
         simpleMailMessage.setText(message);
-
         this.mailSender.send(simpleMailMessage);
     }
 }
