@@ -1,8 +1,8 @@
 package com.example.sender.entity;
 
-import javax.validation.constraints.Pattern;
+//@Pattern(regexp = "^[A-Za-z0-9]+$")
+//@EnumPattern(regexp = "MAIL|HTTP")
 
-@Pattern(regexp = "^(https?|ftp)://[^\\s/$.?#].[^\\s]*$")
 public enum NotificationType {
     MAIL, HTTP
 }

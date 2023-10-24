@@ -1,8 +1,10 @@
 package com.example.sender.entity;
 
+import com.example.sender.controller.util.CustomerTypeSubset;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -18,8 +20,12 @@ import javax.validation.constraints.Pattern;
 @ToString
 @Component
 public class Command {
+    @Valid
     private Message message;
 
+    //    @Pattern(regexp = "^(MAIL|HTTP)$")
+    @Valid
+    @CustomerTypeSubset(anyOf = {NotificationType.MAIL, NotificationType.HTTP})
     private NotificationType type;
     @NotNull
     @NotEmpty

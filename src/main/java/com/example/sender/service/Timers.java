@@ -14,7 +14,7 @@ import java.util.TimerTask;
 @Service
 
 public class Timers {
-    private  Timer timer;
+    private Timer timer;
     @Autowired
     private MessageQueue messageQueue;
     @Autowired
@@ -31,21 +31,18 @@ public class Timers {
                     if (NotificationType.MAIL.equals(s.getType())) {
                         sender.sendEmail(s.getDestination(), s.getMessage().getMessage());
                     } else {
-                    client.sendMessage(s);
+                        client.sendMessage(s);
                     }
 
                 }
             }
         };
-                timer = new Timer("Timer");
-                timer.scheduleAtFixedRate(repeatedTask, 0, 1000L);
-            }
-
-
-
-            @PreDestroy
-            public void finishTimer() {
-                timer.cancel();
-            }
-        }
+        timer = new Timer("Timer");
+        timer.scheduleAtFixedRate(repeatedTask, 0, 1000L);
+    }
+    @PreDestroy
+    public void finishTimer() {
+        timer.cancel();
+    }
+}
 

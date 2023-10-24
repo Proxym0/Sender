@@ -3,6 +3,7 @@ package com.example.sender.entity;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -17,12 +18,15 @@ import java.time.ZonedDateTime;
 @EqualsAndHashCode
 @ToString
 @Component
-@Pattern(regexp = "^(?!$).+")
-@NotNull
-@NotEmpty
-@NotBlank
 public class Message {
+    @NotEmpty
+    @NotBlank
+    @NotNull
     private String external_id;
+
     private ZonedDateTime time;
+    @NotEmpty
+    @NotBlank
+    @NotNull
     private String message;
 }

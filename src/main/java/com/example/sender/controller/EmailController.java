@@ -1,5 +1,6 @@
 package com.example.sender.controller;
 
+import com.example.sender.controller.util.CustomerTypeSubset;
 import com.example.sender.entity.Command;
 import com.example.sender.entity.NotificationType;
 import com.example.sender.service.EmailSenderService;
