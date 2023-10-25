@@ -1,6 +1,9 @@
 package com.example.sender.service;
 
+import com.example.sender.dto.CommandDto;
 import com.example.sender.entity.Command;
+import com.example.sender.entity.Message;
+import com.example.sender.entity.NotificationType;
 import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;
@@ -13,9 +16,21 @@ import java.util.concurrent.PriorityBlockingQueue;
 public class MessageQueue {
     private PriorityBlockingQueue<Command> queue = new PriorityBlockingQueue<>(10, Comparator.comparing(s -> s.getMessage().getTime()));
 
-    public boolean save(Command command) {
+    public boolean save(CommandDto commanddto) {
+        Command command = toEntity(commanddto);
         return queue.add(command);
 
+    }
+    private static Command toEntity(CommandDto commandDto) {
+        return Command.builder()
+                .message(Message.builder()
+                        .message(commandDto.getMessage())
+                        .external_id(commandDto.getExternal_id())
+                        .time(ZonedDateTime.parse(commandDto.getTime()))
+                        .build())
+                .destination(commandDto.getDestination())
+                .type(NotificationType.valueOf(commandDto.getType()))
+                .build();
     }
 
     public List<Command> get() {

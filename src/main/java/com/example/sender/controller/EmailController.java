@@ -1,9 +1,6 @@
 package com.example.sender.controller;
 
-import com.example.sender.controller.util.CustomerTypeSubset;
-import com.example.sender.entity.Command;
-import com.example.sender.entity.NotificationType;
-import com.example.sender.service.EmailSenderService;
+import com.example.sender.dto.CommandDto;
 import com.example.sender.service.MessageQueue;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +15,13 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping()
 @RequiredArgsConstructor
-//@RequestMapping()
 public class EmailController {
     @Autowired
     private MessageQueue queue;
 
     @PostMapping("/save-email")
-    public ResponseEntity saveEmail(@RequestBody @Valid Command command){
-        queue.save(command);
+    public ResponseEntity saveEmail(@RequestBody @Valid CommandDto commandDto){
+        queue.save(commandDto);
         return ResponseEntity.ok("Success");
     }
 }
